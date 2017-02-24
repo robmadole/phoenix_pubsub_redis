@@ -69,8 +69,8 @@ defmodule Phoenix.PubSub.RedisServer do
     {:noreply, state}
   end
 
-  def handle_info({:redix_pubsub, redix_pid, :disconnected, %{reason: reason}}, %{redix_pid: redix_pid} = state) do
-    Logger.error "Phoenix.PubSub disconnected from Redis with reason #{inspect reason} (awaiting reconnection)"
+  def handle_info({:redix_pubsub, redix_pid, :disconnected, %{reason: reason}}, state) do
+    Logger.error "PubSub disconnected because of #{inspect(state, pretty: true)}"
     {:noreply, state}
   end
 
